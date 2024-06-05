@@ -3,13 +3,15 @@ import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ChartOptions } from 'chart.js';
 import DeleteIcon from '@mui/icons-material/Delete';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import DeleteProfile from './DeleteProfile';
+import ViewProfile from './ViewProfile';
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const AdminTable = () => {
     const [profile, setProfile] = useState([]);
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+    const [viewModalOpen, setViewModalOpen] = useState(false);
+    const [vieModalData, setVieModalData] = useState({});
     const [selectProfile, setSelectProfile] = useState("");
     useEffect(() => {
         const getProfile = async () => {
@@ -33,7 +35,7 @@ const AdminTable = () => {
         },
     };
 
-    const Bardata = {
+    const bardata = {
         labels: ['Gaurav', 'Amit', 'Ankit', 'Eleven'],
         datasets: [
             {
@@ -108,11 +110,8 @@ const AdminTable = () => {
                                             {data?.city}
                                         </td>
                                         <td className="px-6 py-4 flex">
-                                            <div>
+                                            <div onClick={() => { setViewModalOpen(true); setVieModalData(data); }}>
                                                 <RemoveRedEyeIcon />
-                                            </div>
-                                            <div>
-                                                <ChangeCircleIcon />
                                             </div>
                                             <div onClick={() => { setDeleteModalOpen(true); setSelectProfile(data?.id) }}>
                                                 <DeleteIcon />
@@ -126,9 +125,10 @@ const AdminTable = () => {
                     </div>
                 }
                 <div className="w-full max-w-md mx-auto mt-10">
-                    <Bar data={Bardata} options={options} />
+                    <Bar data={bardata} options={options} />
                 </div>
             </div>
+            {viewModalOpen && <ViewProfile setViewModalOpen={setViewModalOpen} vieModalData={vieModalData} />}
             {deleteModalOpen && <DeleteProfile setDeleteModalOpen={setDeleteModalOpen} selectProfile={selectProfile} setProfile={setProfile} />}
         </>
     )

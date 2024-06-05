@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   return (
     <MyLayout>
-      <div>Hello</div>
+      <div>npx json-server --watch data/db.json --port 8000</div>
     </MyLayout>
   );
 }
