@@ -5,9 +5,11 @@ import LoginIcon from '@mui/icons-material/Login';
 import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
 import dynamic from 'next/dynamic';
+import HowToRegIcon from '@mui/icons-material/HowToReg';
 const Login = dynamic(() => import('../Login/Login'), { ssr: false });
 const Header = () => {
     const [login, setLogin] = useState<Boolean>(false);
+    const [signUp, setSignUp] = useState<Boolean>(false);
     const router = useRouter();
     const loginValue = Cookies.get('login') || false;
     return (
@@ -32,11 +34,18 @@ const Header = () => {
                                         <LogoutIcon />
                                     </button>
                                     :
-                                    <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2"
-                                        onClick={() => { setLogin(true); }}>
-                                        <LoginIcon />
-                                        Login
-                                    </button>
+                                    <>
+                                        <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2"
+                                            onClick={() => { setLogin(true); }}>
+                                            <LoginIcon />
+                                            Login
+                                        </button>
+                                        <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2"
+                                            onClick={() => { setSignUp(true); }}>
+                                            <HowToRegIcon />
+                                            SignUp
+                                        </button>
+                                    </>
                                 }
                             </li>
                         </ul>
