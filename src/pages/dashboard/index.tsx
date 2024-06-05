@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 const MyLayout = dynamic(() => import('@/components/UiComponent/MyLayout'), { ssr: false });
 const AdminTable = dynamic(() => import('@/components/Admin/AdminTable'), { ssr: false });
-const index = () => {
+const Index = () => {
     const router = useRouter();
     return (
         <MyLayout>
@@ -12,4 +12,4 @@ const index = () => {
         </MyLayout>
     )
 }
-export default index
+export default Index

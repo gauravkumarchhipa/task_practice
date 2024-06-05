@@ -21,7 +21,7 @@ const DeleteProfile = ({ setDeleteModalOpen, selectProfile, setProfile }: any) =
                         </svg>
                         <h3 className="mb-5 text-lg font-normal text-gray-400">Are you sure you want to delete this profile?</h3>
                         <button className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300  font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center" onClick={() => { deleteHandler() }}>
-                            Yes, I'm sure
+                            Yes, I&apos;m sure
                         </button>
                         <button className="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100" onClick={() => setDeleteModalOpen(false)}>No, cancel</button>
                     </div>
