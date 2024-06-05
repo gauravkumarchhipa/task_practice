@@ -48,6 +48,16 @@
       "gender": "male",
       "country": "india",
       "city": "pune"
+    },
+    {
+      "id": "0398",
+      "firstName": "arjun",
+      "lastName": "kumar",
+      "age": "30",
+      "gender": "Male",
+      "country": "india",
+      "city": "Ahmedabad",
+      "profileImage": "blob:http://localhost:3001/29b56f2d-f4a2-440a-81c2-a4bf5d1bdd08"
     }
   ]
 }
