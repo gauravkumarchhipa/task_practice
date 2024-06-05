@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Controller, useForm, UseFormReturn } from 'react-hook-form';
@@ -6,7 +5,6 @@ import { LoginValidation } from '../Login/loginValidation';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const SignUpModal = ({ setSignUp }: any) => {
-    const router = useRouter();
     const [user, setUser] = useState([]);
     const { control, handleSubmit, formState: { errors }, reset }: UseFormReturn<any> = useForm<any>({
         resolver: yupResolver(LoginValidation() as any),
