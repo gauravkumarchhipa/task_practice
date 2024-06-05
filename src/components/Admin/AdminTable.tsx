@@ -84,6 +84,9 @@ const AdminTable = () => {
                                         City
                                     </th>
                                     <th scope="col" className="px-6 py-3">
+                                        Hobbies
+                                    </th>
+                                    <th scope="col" className="px-6 py-3">
                                         View/Delete
                                     </th>
                                 </tr>
@@ -108,6 +111,9 @@ const AdminTable = () => {
                                         </td>
                                         <td className="px-6 py-4">
                                             {data?.city}
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            {data?.hobbies}
                                         </td>
                                         <td className="px-6 py-4 flex">
                                             <div onClick={() => { setViewModalOpen(true); setVieModalData(data); }}>

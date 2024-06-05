@@ -14,14 +14,13 @@ const Profile = () => {
     const submitHandler = async (data: any) => {
         createProfileUser(data)
     }
-    console.log(errors)
     const createProfileUser = async (data: any) => {
         const response = await fetch('http://localhost:8000/profile', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ firstName: data?.firstName, lastName: data?.lastName, age: data?.age, gender: data?.gender?.value, country: data?.country?.value, city: data?.city?.value, profileImage: imagePreview })
+            body: JSON.stringify({ firstName: data?.firstName, lastName: data?.lastName, age: data?.age, gender: data?.gender?.value, country: data?.country?.value, city: data?.city?.value, profileImage: imagePreview, hobbies: data?.hobbies })
         });
         if (!response.ok) {
             throw new Error('Failed to submit profile data');
@@ -175,6 +174,17 @@ const Profile = () => {
                         <input onKeyDown={onKeyDownHandler} type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter your age" {...field} />
                     )} />
                 {renderErrorMessage(errors?.age)}
+            </div>
+            <div className="mb-6">
+                <label htmlFor="hobbies" className="block mb-2 text-sm font-medium text-gray-900 ">Hobbies</label>
+                <Controller
+                    name="hobbies"
+                    control={control}
+                    defaultValue=""
+                    render={({ field }) => (
+                        <input type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Enter your hobbies" {...field} />
+                    )} />
+                {renderErrorMessage(errors?.hobbies)}
             </div>
             <div className="mb-6">
                 <label className="block mb-2 text-sm font-medium text-white" htmlFor="multiple_files">Upload file</label>

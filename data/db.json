@@ -29,7 +29,8 @@
       "age": "24",
       "gender": "male",
       "country": "india",
-      "city": "ahmedabad"
+      "city": "ahmedabad",
+      "hobbies": "cricket"
     },
     {
       "id": "51dc",
@@ -38,7 +39,8 @@
       "age": "20",
       "gender": "male",
       "country": "india",
-      "city": "surat"
+      "city": "surat",
+      "hobbies": "football"
     },
     {
       "id": "845d",
@@ -47,7 +49,8 @@
       "age": "20",
       "gender": "male",
       "country": "india",
-      "city": "pune"
+      "city": "pune",
+      "hobbies": "codding"
     },
     {
       "id": "0398",
@@ -57,7 +60,19 @@
       "gender": "Male",
       "country": "india",
       "city": "Ahmedabad",
+      "hobbies": "learning",
       "profileImage": "blob:http://localhost:3001/29b56f2d-f4a2-440a-81c2-a4bf5d1bdd08"
+    },
+    {
+      "id": "e42a",
+      "firstName": "himanshu",
+      "lastName": "joshi",
+      "age": "20",
+      "gender": "Male",
+      "country": "usa",
+      "city": "New York",
+      "profileImage": "blob:http://localhost:3001/2b1cb67f-3161-4fc5-8d51-e1a03aca044b",
+      "hobbies": "cricket"
     }
   ]
 }
