@@ -6,11 +6,10 @@ import Select from "react-select";
 import { useRouter } from 'next/router';
 const Profile = () => {
     const router = useRouter();
-    const { control, handleSubmit, formState: { errors }, reset }: UseFormReturn<any> = useForm<any>({
+    const { control, handleSubmit, formState: { errors }, reset, watch }: UseFormReturn<any> = useForm<any>({
         resolver: yupResolver(ProfileValidation() as any),
         mode: "onChange",
     });
-
     const submitHandler = async (data: any) => {
         createProfileUser(data)
     }
@@ -72,16 +71,32 @@ const Profile = () => {
     }
 
     const optionGender: any = [
-        { value: 'male', label: 'Male' },
-        { value: 'female', label: 'Female' }
+        { value: 'Male', label: 'Male' },
+        { value: 'Female', label: 'Female' }
     ];
-    const optionCity: any = [
-        { value: 'ahmedabad', label: 'Ahmedabad' },
-        { value: 'mumbai', label: 'Mumbai' },
-        { value: 'surat', label: 'Surat' },
-        { value: 'vadodara', label: 'Vadodara' },
-        { value: 'hyderabad', label: 'Hyderabad' },
-        { value: 'pune', label: 'Pune' },
+    const optionCityIndia: any = [
+        { value: 'Ahmedabad', label: 'Ahmedabad' },
+        { value: 'Mumbai', label: 'Mumbai' },
+        { value: 'Surat', label: 'Surat' },
+        { value: 'Vadodara', label: 'Vadodara' },
+        { value: 'Hyderabad', label: 'Hyderabad' },
+        { value: 'Pune', label: 'Pune' },
+    ];
+    const optionCityUsa: any = [
+        { value: 'New York', label: 'New York' },
+        { value: 'Los Angeles', label: 'Los Angeles' },
+        { value: 'Chicago', label: 'Chicago' },
+        { value: 'Dallas', label: 'Dallas' },
+        { value: 'Austin', label: 'Austin' },
+        { value: 'San Antonio', label: 'San Antonio' },
+    ];
+    const optionCityCanada: any = [
+        { value: 'Toronto', label: 'Toronto' },
+        { value: 'Vancouver', label: 'Vancouver' },
+        { value: 'Calgary', label: 'Calgary' },
+        { value: 'Ottawa', label: 'Ottawa' },
+        { value: 'Edmonton', label: 'Edmonton' },
+        { value: 'Mississauga', label: 'Mississauga' }
     ];
 
     const optionCountry: any = [
@@ -208,7 +223,7 @@ const Profile = () => {
                             }}
                             name="city"
                             placeholder="Select City"
-                            options={optionCity}
+                            options={watch('country')?.value === "usa" ? optionCityUsa : (watch('country')?.value === "canada") ? optionCityCanada : optionCityIndia}
                             styles={customStyles}
                         />
                     )}
