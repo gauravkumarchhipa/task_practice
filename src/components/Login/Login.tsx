@@ -1,13 +1,42 @@
 import { useRouter } from 'next/router';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Cookies from 'js-cookie';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Controller, useForm, UseFormReturn } from 'react-hook-form';
+import { LoginValidation } from './loginValidation';
 const Login = ({ setLogin }: any) => {
     const router = useRouter();
-    const submitHandler = () => {
-        router.push("/dashboard");
-        Cookies.set('login', "true");
-        setLogin(false);
+    const [user, setUser] = useState([]);
+    const { control, handleSubmit, formState: { errors }, reset }: UseFormReturn<any> = useForm<any>({
+        resolver: yupResolver(LoginValidation() as any),
+        mode: "onChange",
+    });
+    useEffect(() => {
+        const getUser = async () => {
+            const response = await fetch('http://localhost:8000/user');
+            const data = await response.json();
+            setUser(data);
+        }
+        getUser();
+    }, []);
+    const submitHandler = async (data: any) => {
+        console.log(user, data);
+        const loginData = user?.filter((userData: any) => userData?.email === data?.email && userData?.password === data.password)
+        if (loginData?.length > 0) {
+            Cookies.set('login', "true");
+            router.push("/dashboard");
+            setLogin(false);
+        } else {
+
+        }
     }
+    function renderErrorMessage(error: any) {
+        if (error && typeof error.message === 'string') {
+            return <p className="absolute text-red-600 text-xs">{error.message}</p>;
+        }
+        return null;
+    }
+
     return (
         <div id="authentication-modal" className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div className="relative p-4 w-full max-w-md max-h-full">
@@ -24,16 +53,30 @@ const Login = ({ setLogin }: any) => {
                         </button>
                     </div>
                     <div className="p-4 md:p-5">
-                        <form className="space-y-4" >
+                        <form className="space-y-4" onSubmit={handleSubmit(submitHandler)} >
                             <div>
                                 <label htmlFor="email" className="block mb-2 text-sm font-medium  text-white">Your email</label>
-                                <input type="email" name="email" id="email" className=" border  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-600 border-gray-500 placeholder-gray-400 text-white" placeholder="name@company.com" />
+                                <Controller
+                                    name="email"
+                                    control={control}
+                                    defaultValue=""
+                                    render={({ field }) => (
+                                        <input type="email" id="email" className=" border  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-600 border-gray-500 placeholder-gray-400 text-white" placeholder="Enter your email" {...field} />
+                                    )} />
+                                {renderErrorMessage(errors?.email)}
                             </div>
                             <div>
-                                <label htmlFor="email" className="block mb-2 text-sm font-medium  text-white">Your email</label>
-                                <input type="email" name="email" id="email" className=" border  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-600 border-gray-500 placeholder-gray-400 text-white" placeholder="name@company.com" />
+                                <label htmlFor="password" className="block mb-2 text-sm font-medium  text-white">Your email</label>
+                                <Controller
+                                    name="password"
+                                    control={control}
+                                    defaultValue=""
+                                    render={({ field }) => (
+                                        <input type="password" id="password" className=" border  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-600 border-gray-500 placeholder-gray-400 text-white" placeholder="Enter your password" {...field} />
+                                    )} />
+                                {renderErrorMessage(errors?.password)}
                             </div>
-                            <button type="submit" className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" onClick={() => { submitHandler(); }}>Login to your account</button>
+                            <button type="submit" className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Login to your account</button>
                         </form>
                     </div>
                 </div>
