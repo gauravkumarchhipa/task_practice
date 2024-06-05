@@ -1,12 +1,12 @@
 import { Inter } from "next/font/google";
-import MyLayout from "@/components/UiComponent/MyLayout";
-
+import dynamic from 'next/dynamic';
+const MyLayout = dynamic(() => import('@/components/UiComponent/MyLayout'), { ssr: false });
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
     <MyLayout>
-      <div>Hellooo</div>
+      <div>Hello</div>
     </MyLayout>
   );
 }
