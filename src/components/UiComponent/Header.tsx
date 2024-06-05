@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
 import dynamic from 'next/dynamic';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
+import SignUpModal from '../SignUp/SignUpModal';
 const Login = dynamic(() => import('../Login/Login'), { ssr: false });
 const Header = () => {
     const [login, setLogin] = useState<Boolean>(false);
@@ -53,6 +54,7 @@ const Header = () => {
                 </div>
             </nav>
             {login && <Login setLogin={setLogin} />}
+            {signUp && <SignUpModal setSignUp={setSignUp} />}
         </>
     )
 }
