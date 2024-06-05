@@ -1,37 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ChartOptions } from 'chart.js';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const AdminTable = () => {
-    const tableData =
-        [
-            {
-                name: "Gaurav",
-                age: 24,
-                xender: "Male",
-                country: "india"
-            },
-            {
-                name: "Amit",
-                age: 25,
-                xender: "Male",
-                country: "America"
-            },
-            {
-                name: "Ankit",
-                age: 30,
-                xender: "Male",
-                country: "india"
-            },
-            {
-                name: "Eleven",
-                age: 15,
-                xender: "Female",
-                country: "America"
-            }
-        ]
+    const [profile, setProfile] = useState([]);
+    useEffect(() => {
+        const getProfile = async () => {
+            const response = await fetch('http://localhost:8000/profile');
+            const data = await response.json();
+            setProfile(data);
+        }
+        getProfile();
+    }, []);
 
     const options: ChartOptions<'bar'> = {
         responsive: true,
@@ -75,33 +57,45 @@ const AdminTable = () => {
                     <thead className="text-xs uppercase bg-gray-700 text-gray-400">
                         <tr>
                             <th scope="col" className="px-6 py-3">
-                                Name
+                                FirstName
+                            </th>
+                            <th scope="col" className="px-6 py-3">
+                                LastName
                             </th>
                             <th scope="col" className="px-6 py-3">
                                 Age
                             </th>
                             <th scope="col" className="px-6 py-3">
-                                Xender
+                                Gender
                             </th>
                             <th scope="col" className="px-6 py-3">
                                 Country
                             </th>
+                            <th scope="col" className="px-6 py-3">
+                                City
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
-                        {tableData?.map((data: any, i: number) => (
-                            <tr className=" border-b bg-gray-800 border-gray-700" key={i}>
+                        {profile?.map((data: any) => (
+                            <tr className=" border-b bg-gray-800 border-gray-700" key={data?.id}>
                                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {data?.name}
+                                    {data?.firstName}
+                                </th>
+                                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {data?.lastName}
                                 </th>
                                 <td className="px-6 py-4">
                                     {data?.age}
                                 </td>
                                 <td className="px-6 py-4">
-                                    {data?.xender}
+                                    {data?.gender}
                                 </td>
                                 <td className="px-6 py-4">
                                     {data?.country}
+                                </td>
+                                <td className="px-6 py-4">
+                                    {data?.city}
                                 </td>
                             </tr>
                         ))}

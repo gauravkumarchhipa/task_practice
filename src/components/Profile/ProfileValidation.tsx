@@ -22,6 +22,12 @@ export const ProfileValidation = () => {
 
         age: Yup.string()
             .required("Enter your age")
-            .max(3, "Max 3 characters required")
+            .max(3, "Max 3 characters required"),
+
+        gender: Yup.object().required("Select your gender"),
+
+        country: Yup.object().required("Select your country"),
+
+        city: Yup.object().required("Select your city"),
     })
 }

@@ -8,5 +8,34 @@
       "email": "amit@gmail.com",
       "password": "1234"
     }
+  ],
+  "profile": [
+    {
+      "id": "be14",
+      "firstName": "gaurav",
+      "lastName": "chhipa",
+      "age": "24",
+      "gender": "male",
+      "country": "india",
+      "city": "ahmedabad"
+    },
+    {
+      "id": "51dc",
+      "firstName": "amit",
+      "lastName": "chauhan",
+      "age": "20",
+      "gender": "male",
+      "country": "india",
+      "city": "surat"
+    },
+    {
+      "id": "845d",
+      "firstName": "ankit",
+      "lastName": "rai",
+      "age": "20",
+      "gender": "male",
+      "country": "india",
+      "city": "pune"
+    }
   ]
 }
