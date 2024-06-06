@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { parse } from "cookie";
-
+// import Cookies from 'js-cookie';
 const beforeLoginPath = ["/"];
 const afterLoginPath = ["/profile/:path*", "/dashboard/:path*"];
 
