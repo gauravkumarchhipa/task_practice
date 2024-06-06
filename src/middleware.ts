@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { parse } from "cookie";
-// import Cookies from 'js-cookie';
 const beforeLoginPath = ["/"];
 const afterLoginPath = ["/profile/:path*", "/dashboard/:path*"];
 
@@ -28,7 +27,6 @@ export async function middleware(request: NextRequest) {
 
   const cookies = parse(request.headers.get("cookie") || "");
   const token = cookies.login;
-  console.log(token, "gaurav");
 
   if (isBeforeLoginPage && token) {
     // User is logged in and trying to access a before login page
