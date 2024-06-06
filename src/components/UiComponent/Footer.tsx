@@ -39,7 +39,7 @@ const Footer = () => {
           </div>
           <hr className="my-6 border-gray-300 sm:mx-auto lg:my-8" />
           <span className="block text-sm text-gray-700 sm:text-center">
-            © 2023{" "}
+            © 2024{" "}
             <Link href="/" className="hover:underline">
               Practice
             </Link>
